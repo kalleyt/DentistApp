@@ -1,0 +1,70 @@
+<div>
+    <clr-dropdown>
+      <button type="button" class="btn btn-outline-primary" clrDropdownTrigger>
+        Select City
+        <clr-icon shape="caret down"></clr-icon>
+      </button>
+      <clr-dropdown-menu clrPosition="bottom-right" *clrIfOpen>
+        <label class="dropdown-header">Select a City</label>
+        <button type="button" clrDropdownItem (click)="selected('Sofia')">Sofia</button>
+        <button type="button" clrDropdownItem (click)="selected('Varna')">Varna</button>
+        <button type="button" clrDropdownItem (click)="selected('Stara Zagora')">Stra Zagora</button>
+        <button type="button" clrDropdownItem (click)="selected('Sliven')">Sliven</button>
+      </clr-dropdown-menu>
+    </clr-dropdown>
+
+  <form>
+    <section class="form-block">
+      <label>Search by name: </label>
+      <div class="form-group">
+        <label>Name:</label>
+        <input type="text" #titleInput>
+      </div>
+    </section>
+    <button class="btn btn-primary" (click) = "searchByName(titleInput.value)">Search</button>
+  </form>
+
+  Dentists:
+  <clr-datagrid>
+    <clr-dg-column>First Name</clr-dg-column>
+    <clr-dg-column>Last Name</clr-dg-column>
+    <clr-dg-column>City</clr-dg-column>
+    <clr-dg-column>Type</clr-dg-column>
+    <clr-dg-column>View</clr-dg-column>
+
+    <clr-dg-row *ngFor="let dentist of dentists">
+      <clr-dg-cell>{{dentist.firstName}}</clr-dg-cell>
+      <clr-dg-cell>{{dentist.lastName}}</clr-dg-cell>
+      <clr-dg-cell>{{dentist.city}}</clr-dg-cell>
+      <clr-dg-cell>{{dentist.type}}</clr-dg-cell>
+      <clr-dg-cell (click)="viewProfile(dentist);condition=true">View Profile</clr-dg-cell>
+    </clr-dg-row>
+
+    <clr-dg-footer>{{dentists.length}} users</clr-dg-footer>
+  </clr-datagrid>
+
+  <div *ngIf="condition">
+    <div class="row">
+      <div class="col-lg-5 col-md-8 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="card-header">
+            {{currentDentist.firstName}} + {{currentDentist.lastName}}
+          </div>
+          <div class="card-block">
+            <div class="card-title">
+              {{currentDentist.city}}
+            </div>
+            <div class="card-text">
+              Something about the dentist.
+            </div>
+          </div>
+          <div class="card-footer">
+            <button class="btn btn-sm btn-link">Save Appointment</button>
+            <button class="btn btn-sm btn-link">Read more</button>
+          </div>
+        </div>
+      </div>
+    </div>
+      Dentist + {{currentDentist.firstName}}  {{currentDentist.lastName}}
+  </div>
+</div>
